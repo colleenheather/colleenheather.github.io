@@ -1,5 +1,11 @@
 /* spacing on all sections */
-.section {
+
+
+html {
+    background-color: black;
+    color:#fff
+}
+/**.section {
     margin-top: 4rem;
     padding-top: 4rem;
 }
@@ -45,6 +51,10 @@
 .social-icons {
     font-size: 36px;
     cursor: pointer;
+
+    text-align: center;
+    width: 100%;
+    
 }
 .fa-facebook:hover,
 .fa-instagram:hover,
@@ -73,4 +83,9 @@
 }
 .servicesText:hover {
     border: 1px solid #008000;
+}
+
+.list-elements {
+    color: grey;
+    font-weight:lighter;
 }

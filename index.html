@@ -31,11 +31,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#services">Services</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                        <a class="nav-link" href="#portfolio">Projects</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
@@ -57,41 +57,120 @@
         </div>
     </section>
      
-     <!-- about section -->
+     <!-- about section --> <!-- mt-4 pt-4-->
      <section class="container mt-4 pt-4 section" id="about">
         <h1 class="text-center">About Me</h1>
         
         <div class="row mt-4">
             <div class="col-lg-6">
-                <img src="images/mexico.jpg" class="image_about" alt="">
+                <!--<img src="images/mexico.jpg" class="image_about" alt="">-->
+                <!--CHANGES HERE -->
+                <canvas width="450" height="450"></canvas>
+                <script id="vertex-shader" type="x-shader/x-vertex">
+                    attribute  vec4 vPosition;  //input
+                    attribute  vec4 vColor;
+                    varying vec4 fColor;    //output
+                    
+                    uniform vec3 theta;
+                    
+                    void main()
+                    {
+                        // Compute the sines and cosines of theta for each of
+                        //   the three axes in one computation.
+                        
+                        vec3 angles = radians( theta );
+                        vec3 c = cos( angles );
+                        vec3 s = sin( angles );
+                    
+                        // Remeber: thse matrices are column-major
+                        mat4 rx = mat4( 1.0,  0.0,  0.0, 0.0,
+                                0.0,  c.x,  s.x, 0.0,
+                                0.0, -s.x,  c.x, 0.0,
+                                0.0,  0.0,  0.0, 1.0 ); //rotate x
+                    
+                        mat4 ry = mat4( c.y, 0.0, -s.y, 0.0,
+                                0.0, 1.0,  0.0, 0.0,
+                                s.y, 0.0,  c.y, 0.0,
+                                0.0, 0.0,  0.0, 1.0 );  //rotate y
+                    
+                    
+                        mat4 rz = mat4( c.z, s.z, 0.0, 0.0,
+                                -s.z,  c.z, 0.0, 0.0,
+                                0.0,  0.0, 1.0, 0.0,
+                                0.0,  0.0, 0.0, 1.0 ); //rotate z
+                    
+                        fColor = vColor;
+                        gl_Position = rz * ry * rx * vPosition;
+                        gl_Position.z = -gl_Position.z;
+                    }
+                    </script>
+                    
+                    <script id="fragment-shader" type="x-shader/x-fragment">
+                    
+                    precision mediump float;
+                    
+                    varying vec4 fColor;
+                    
+                    void
+                    main()
+                    {
+                        gl_FragColor = fColor;
+                    }
+                    </script>
+                    <script src="webgl/helpercode.js"></script>
+                    <script src="webgl/webglcube.js"></script>
+                    <br/>
             </div>
 
             <div class="col-lg-6">
-                <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+                <p> I am a Computer Science student who is passionate about solving problems and learning technologies.
+                    I have spent the past year exposing myself to different technologies in order to pursue full-stack development. 
                     
                 </p>
+                <p><i>Here are some of the technolgies I have been familiarizing myself with:</i></p>
                 <div class="row mt-3">
                     <div class="col-md-6">
-                        <ul>
-                            <li>Windsurfing</li>
-                            <li>Mountain-climbing</li>
-                            <li>Brain-surgery</li>
+                        <ul class="list-elements">
+                            <li>React</li>
+                            <li>Bootstrap</li>
+                            <li>Javascript</li>
 
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <ul>
-                            <li>Creative-writing</li>
-                            <li>Gymnastics</li>
-                            <li>Landscape painting</li>
+                        <ul class="list-elements">
+                            <li>Java</li>
+                            <li>mySQL</li>
+                            <li>GoLang</li>
 
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-elements">
+                            <li>Linux Terminal</li>
+                            <li>GIT</li>
                         </ul>
                     </div>
                 </div>
                 <div class="row mt-3">
-                    <p> Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                    </p>
+                    <p><i>Relevant Completed Course Work:</i></p>
+                    <div class="col-md-6">
+                        <ul class="list-elements">
+                            <li>ITS320 - Basic Programming (Python)</li>
+                            <li>MIS350 - Information Systems Analysis and Design</li>
+                            <li>CSC370 - Programming I (Java) </li>
+                            <li>CSC372 - Programming II (Java) </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-6">
+                        <ul class="list-elements">
+                            <li>CSC205- Operating System and Architecture</li>
+                            <li>CSC300 - Artificial Intellegence</li>
+                            <li>CSC400 - Data Structures and Algorithms</li>
+                            <li>CSC405 - Graphics and Visualization</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,7 +178,7 @@
 
       <!-- services section-->
     <!-- https://getbootstrap.com/docs/5.2/components/card/#about -->
-    <section class="container section" id="services">
+    <!-- <section class="container section" id="services">
         <h1 class="text-center">Services</h1>
         <div class="row">
             <div class="col-lg-4 mt-4">
@@ -175,22 +254,26 @@
                 </div>  
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- portfolio section-->
     <section class="section" id="portfolio">
         <div class="container mt-3">
-            <h1 class="text-center">Portfolio</h1>
+            <h1 class="text-center">Projects</h1>
 
             <div class="row">
                 <div class="col-lg-4 mt-4">
                     <div class="card">
-                        <img class="card-img-top" src="images/databasemanage.png" alt="Card image" style="width:100%">
+                        <img class="card-img-top" src="images/vendorDatabase.png" alt="Card image" style="width:100%">
                         <div class="card-body">
                             <h4 class="card-title">Database Registery</h4>
-                            <p class="card-text">Java, Javafx, & mySQL </p>
+                            <p class="card-text"><i>Technologies used: Java, Javafx, & mySQL</i></p>
+                            <p class="card-text">Runs mySQL queries with Java code. A Javafx GUI is implemented to allow a user to
+                                directly manipulate and manage the database. User can: create, delete, edit, and search vendors.
+                            </p>
+                            <br/>
                             <div class="text-center">
-                                <a href="#" class="btn btn-success">Link</a>
+                                <a href="https://github.com/colleenheather/colleenheather.github.io/blob/main/vendorDatabase/VenderDatabase.java" class="btn btn-success">See code</a>
                             </div>
                         </div>
                     </div>
@@ -201,9 +284,15 @@
                         <img class="card-img-top" src="images/puzzlegame.png" alt="Card image" style="width:100%">
                         <div class="card-body">
                             <h4 class="card-title">Puzzle Game</h4>
-                            <p class="card-text">JavaScript, HTML, & CSS</p>
+                            <p class="card-text"><i>Technologies used: JavaScript, HTML, & CSS</i></p>
+                            <p class="card-text">Takes inpspiration from a Mario Party mini game. Javascript enables 
+                                the user to control blocks with keybored arrows. The goal is to match colors.
+                                 
+                            </p>
+                            <br/>
                             <div class="text-center">
-                                <a href="https://colleenheather.github.io/puzzlegame/index.html" class="btn btn-success">Link</a>
+                                <a href="https://colleenheather.github.io/puzzlegame/index.html" class="btn btn-success">Play</a>
+                                <a href="https://github.com/colleenheather/puzzle-game" class="btn btn-success">See Code</a>
                             </div>
                         </div>
                     </div>
@@ -211,63 +300,74 @@
 
                 <div class="col-lg-4 mt-4">
                     <div class="card">
-                        <img class="card-img-top" src="images/weatherapp.png" alt="Card image" style="width:100%">
+                        <img class="card-img-top" src="images/calllogr.png" alt="Card image" style="width:100%">
                         <div class="card-body">
-                            <h4 class="card-title">Weather App</h4>
-                            <p class="card-text">React</p>
+                            <h4 class="card-title">Mock API Saas</h4>
+                            <p class="card-text"><i>Technologies used: GoLang, SQL, Docker</i></p>
+                            <p class="card-text">Contributed to a high-level developers project. 
+                                Created hashed API key for user signup. Created POST/config server calls.
+                                Exposure to linux terminal navigation, managing SQL database, & testing
+                            </p>
                             <div class="text-center">
-                                <a href="#" class="btn btn-success">Link</a>
+                                <a href="https://github.com/sethgrid/calllogr" class="btn btn-success">See code</a>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- <div class="col-lg-4 mt-4">
+                    <div class="card">
+                        <img class="card-img-top" src="images/weatherapp2.png" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Weather App</h4>
+                            <p class="card-text"><i>Technolgoies used: React</i></p>
+                            <p class="card-text">Using OpenWeather API to see forecast in provided cities</p>
+                            <div class="text-center">
+                                <a href="https://github.com/colleenheather/react-weather-app" class="btn btn-success">See Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
             </div>
             <br>
 
-            <!--
             <div class="row">
+
+                <!-- <div class="col-lg-4 mt-4">
+                    <div class="card">
+                        <img class="card-img-top" src="images/calllogr.png" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Mock API Saas</h4>
+                            <p class="card-text"><i>Technologies used: GoLang, SQL, Linux</i></p>
+                            <p class="card-text">Contributed to a high-level developers project. 
+                                Created hashed API key for user signup. Created POST/config server calls.
+                                Exposure to linux terminal navigation, managing SQL database, & testing
+                            </p>
+                            <div class="text-center">
+                                <a href="https://github.com/sethgrid/calllogr" class="btn btn-success">Link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
                 <div class="col-lg-4 mt-4">
                     <div class="card">
-                        <img class="card-img-top" src="images/portfolioImage4.jpeg" alt="Card image" style="width:100%">
+                        <img class="card-img-top" src="images/weatherapp2.png" alt="Card image" style="width:100%">
                         <div class="card-body">
-                            <h4 class="card-title">Messaging Service</h4>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <h4 class="card-title">Weather App</h4>
+                            <p class="card-text"><i>Technolgoies used: React, Axios, & Javascript</i></p>
+                            <p class="card-text">Axios and useState Hook to to handle OpenWeather API. A GET request is used in order to see the forecast of a provided city.</p>
                             <div class="text-center">
-                                <a href="#" class="btn btn-success">Link</a>
+                                <a href="https://github.com/colleenheather/react-weather-app" class="btn btn-success">See Code</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-lg-4 mt-4">
-                    <div class="card">
-                        <img class="card-img-top" src="images/portfolioImage1.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Twitter Clone</h4>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <div class="text-center">
-                                <a href="#" class="btn btn-success">Link</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 mt-4">
-                    <div class="card">
-                        <img class="card-img-top" src="images/portfolioImage4.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Blog App</h4>
-                            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <div class="text-center">
-                                <a href="#" class="btn btn-success">Link</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
     </section>
 
--->
     
      <!-- contact section-->
     <!-- https://getbootstrap.com/docs/5.2/forms/overview -->
@@ -290,16 +390,28 @@
 
             <div class="col-lg-6">
                 <!-- form fields -->
-                <form action="https://formsubmit.co/colleen.ammons@gmail.com" method="POST">
+                <form  action="https://formsubmit.co/colleen.ammons@gmail.com" method="POST">
                     <input type="text" class="form-control form-control-lg" name="name" placeholder="Name" required>
                     <input type="email" class="form-control mt-3"name="email" placeholder="Email" required>
-                    <!-- <input type="text" class="form-control mt-3" placeholder="Subject"> -->
                     <div class="mb-3 mt-3">
                       <input type="text" class="form-control mt-3"name="message" placeholder="Details" required>
-                       <!-- <textarea class="form-control" rows="5" id="comment" name="text" placeholder="Project Details"></textarea>-->
                     </div>
                     <button type="submit" class="btn btn-success mt-3">Contact Me</button>
                 </form>
+
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <div class="social-icons mt-4">
+                    <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/colleen-ammons-3101bb152/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/colleenheather?tab=repositories" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
             </div>
         </div>
         
@@ -307,19 +419,8 @@
     
     <!-- footer section-->
     <footer class="container-fluid footer" id="footer">
-        <!-- social media icons -->
-        <div class="social-icons mt-4">
-            <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.linkedin.com/in/colleen-ammons-3101bb152/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/colleenheather?tab=repositories" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
+        <br/>
     </footer>
-    
-
-
-    <!-- load javascript after loading all html content -->
-    <script src="script.js"></script>
 
 </body>
 
