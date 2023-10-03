@@ -89,3 +89,8 @@ html {
     color: black;
     font-weight:lighter;
 }
+
+.calllogr-message {
+    color: red;
+    font-style: italic;
+}
